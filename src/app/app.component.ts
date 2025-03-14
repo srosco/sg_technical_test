@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { filter, map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,27 @@ import { map, Observable, of } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  mockedData$: Observable<any> = of({
+export class AppComponent implements OnInit {
+  dataTest$: Observable<number> = of(0);
+  numberTabs: any[] = [];
+  ngOnInit() {
+    this.dataTest$ = of(1, 2, 3, 4, 5, 6);
+  
+    const filteredDataTest$ = this.dataTest$.pipe(
+      filter((value) => value % 2 === 0)
+    );
+
+    filteredDataTest$.subscribe({
+      next: (value) => {
+        console.log('values ==> ', value),
+        this.numberTabs.push(value)
+      },
+      complete: () => console.log('Observable is completed')
+    })
+  } 
+  
+
+  mockedData$: Observable<any[]> = of({
     results: [
       {
         "id": "1",
