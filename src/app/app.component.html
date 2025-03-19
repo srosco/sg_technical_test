@@ -1,5 +1,9 @@
 <div>
   <table>
+    <!-- Caption tag is better to improve you ally score. And to be more respectful with the html conventions -->
+    <caption>
+      Description about the table data.
+    </caption>
     <thead>
       <tr>
         <th>Name</th>
@@ -9,15 +13,16 @@
     </thead>
     <tbody>
       @for (dataItem of mockedData$ | async; track dataItem.id) {
-        <tr>
-          <td>{{dataItem.name}}</td>
-          <td>{{dataItem.about}}</td>
-          <td>{{dataItem.address}}</td>
-        </tr>
+      <tr>
+        <td>{{ dataItem.name }}</td>
+        <td>{{ dataItem.about }}</td>
+        <td>{{ dataItem.address }}</td>
+      </tr>
       }
     </tbody>
   </table>
   @for (item of numberTabs; track item) {
-    <div>{{item}}</div>
+  <div>{{ item }}</div>
   }
 </div>
+  
